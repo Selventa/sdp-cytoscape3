@@ -1,6 +1,6 @@
-[submodule "apps/model-builder"]
-	path = apps/model-builder
-	url = git@github.com:Selventa/model-builder.git
 [submodule "apps/kam-nav"]
 	path = apps/kam-nav
 	url = git@github.com:OpenBEL/kam-nav.git
+[submodule "apps/model-builder"]
+	path = apps/model-builder
+	url = git@github.com:Selventa/model-builder.git
