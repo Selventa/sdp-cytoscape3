@@ -1,0 +1,16 @@
+*.iml
+*.ipr
+*.iws
+.gradle
+build
+out
+tools/gradle
+tools/gradle-wrapper/*-bin
+tools/cytoscape/framework/instances/instance.properties
+tools/cytoscape/framework/data/*
+tools/cytoscape/work/*
+tools/deploy/cytoscape/framework/instances/instance.properties
+tools/deploy/cytoscape/framework/data/*
+tools/deploy/cytoscape/framework/plugins/*
+tools/deploy/cytoscape/work/*
+tools/distribution/cytoscape/framework/plugins/*

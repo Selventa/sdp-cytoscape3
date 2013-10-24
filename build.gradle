@@ -1,0 +1,64 @@
+// vim: ts=2 sw=2:
+apply plugin: 'java'
+
+project.ext {
+  sourceDir      = 'launcher/src'
+  buildDir       = 'launcher/build'
+  cleanApps      = []
+  compileJarApps = []
+  buildApps      = []
+  testApps       = []
+}
+sourceSets {
+  main {
+    java { srcDirs = [project.ext.sourceDir] }
+    output.classesDir = "$project.ext.buildDir/classes"
+  }
+}
+configurations {
+  provided
+  compileJava.sourceCompatibility = 1.7
+  compileJava.targetCompatibility = 1.7
+  compileTestJava.sourceCompatibility = 1.7
+  compileTestJava.targetCompatibility = 1.7
+}
+
+new File('apps').eachDir { appDir ->
+    task "clean-${appDir.name}" (type: GradleBuild) {
+      buildFile = "${appDir}/build.gradle"
+      tasks = ['clean']
+    }
+    project.ext.cleanApps << "clean-${appDir.name}"
+    task "compileJar-${appDir.name}" (type: GradleBuild) {
+      buildFile = "${appDir}/build.gradle"
+      tasks = ['compileGroovy', 'jar']
+    }
+    project.ext.compileJarApps << "compileJar-${appDir.name}"
+    task "build-${appDir.name}" (type: GradleBuild) {
+      buildFile = "${appDir}/build.gradle"
+      tasks = ['build']
+    }
+    project.ext.buildApps << "build-${appDir.name}"
+    task "test-${appDir.name}" (type: GradleBuild) {
+      buildFile = "${appDir}/build.gradle"
+      tasks = ['test']
+    }
+    project.ext.testApps << "test-${appDir.name}"
+}
+
+clean.dependsOn project.ext.cleanApps
+build.dependsOn project.ext.buildApps
+test.dependsOn project.ext.testApps
+task compileJarApps(dependsOn: project.ext.compileJarApps)
+
+// gradle wrapper, included in project tree
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.8'
+  archiveBase = Wrapper.PathBase.PROJECT
+  archivePath = "tools/gradle-wrapper"
+  distributionBase = Wrapper.PathBase.PROJECT
+  distributionPath = "tools/gradle"
+  distributionUrl = "gradle-1.8-bin.zip"
+  scriptFile = "$System.env.DEV_SCRIPTS_DIR/gradlew"
+  jarFile = "$System.env.DEV_TOOLS_DIR/gradle-wrapper/wrapper.jar"
+}
