@@ -19,6 +19,8 @@ This project provides tools and scripts necessary to build and test within a sel
 - The build environment's scripts are contained within the scripts_ directory.
 - The build environment tools are contained within the tools_ directory.
 
+The build environment config is defined in env.sh_.  It provides a bash repl that allows the developer to run different steps of the build.  This is defined in go.sh_.
+
 .. _OpenBEL Nav: https://github.com/OpenBEL/kam-nav
 .. _Model Builder: https://github.com/Selventa/model-builder
 .. _apps: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/apps
@@ -26,3 +28,5 @@ This project provides tools and scripts necessary to build and test within a sel
 .. _resources: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/resources
 .. _scripts: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/scripts
 .. _tools: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/tools
+.. _env.sh: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/env.sh
+.. _go.sh: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/go.sh
