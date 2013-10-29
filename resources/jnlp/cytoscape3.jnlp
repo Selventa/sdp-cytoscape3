@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>                                                                                              
+<?xml version="1.0" encoding="utf-8"?>
 <jnlp spec="1.0+"
-      codebase="#{URL_ROOT}"
-      href="cytoscape.jnlp">
+      codebase="CODEBASE_URL"
+      href="cytoscape3.jnlp">
 
     <information>
         <title>SDP Cytoscape</title>
@@ -24,7 +24,7 @@
 
     <resources>
         <j2se version="1.7+"/>
-        <jar href="sdp-cytoscape.jar" main="true"/>
+        <jar href="sdp-cytoscape3.jar" main="true"/>
     </resources>
 
     <application-desc main-class="com.selventa.sdp.Main"/>

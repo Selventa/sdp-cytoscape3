@@ -4,6 +4,13 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"/../
 cd "${DIR}" || exit 1
 . env.sh || exit 1
 
+if [ -z "$DIST_CODEBASE_URL" ]; then
+    echo "What is codebase url?  DIST_CODEBASE_URL must be set."
+    exit 1
+fi
+
+CODEBASE_URL=$1
+
 # build apps and launcher
 gradle clean build
 
@@ -18,15 +25,19 @@ zip -r "$DEV_DIR/build/cytoscape.zip" cytoscape
 popd > /dev/null
 
 # package and sign launcher
-DEV_LAUNCHER_JAR="$DEV_DIR/build/libs/sdp-cytoscape.jar"
+DEV_LAUNCHER_JAR="$DEV_DIR/build/libs/sdp-cytoscape3.jar"
 pushd "$DEV_DIR/build" > /dev/null
-jar -uf "$DEV_LAUNCHER_JAR" "cytoscape.zip"
-jarsigner -keystore  "$DIST_KEYSTORE_FILE" \
-          -storepass "$DIST_KEYSTORE_PASS" \
-          "$DEV_LAUNCHER_JAR" "$DIST_SIGNING_ALIAS"
-popd > /dev/null
+    # package
+    jar -uf "$DEV_LAUNCHER_JAR" "cytoscape.zip"
 
-# build gzip for jnlp
-tar cf "$DEV_DIR/build/sdp-cytoscape.tar" -C "$DEV_DIR/build/libs" .
-tar uf "$DEV_DIR/build/sdp-cytoscape.tar" -C "$DIST_RESOURCES_DIR/jnlp" .
-gzip "$DEV_DIR/build/sdp-cytoscape.tar"
+    # sign
+    jarsigner -keystore  "$DIST_KEYSTORE_FILE" \
+              -storepass "$DIST_KEYSTORE_PASS" \
+              "$DEV_LAUNCHER_JAR" "$DIST_SIGNING_ALIAS"
+
+    # copy jnlp resources
+    cp "$DIST_RESOURCES_DIR"/jnlp/* "$DEV_DIR/build"
+
+    # set codebase
+    sed -i "s#CODEBASE_URL#$DIST_CODEBASE_URL#g" *.jnlp
+popd > /dev/null
