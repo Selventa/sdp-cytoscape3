@@ -73,6 +73,10 @@ You might want to do the following:
 
   - set the ``DEV_CY3_DIR`` environment variable to your cytoscape directory
 
+- set the log file for tools/cytoscape
+
+  - set the ``DEV_CY3_LOG_FILE`` environment variable to the log file path
+
 .. _OpenBEL Nav: https://github.com/OpenBEL/kam-nav
 .. _Model Builder: https://github.com/Selventa/model-builder
 .. _apps: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/apps
