@@ -13,7 +13,7 @@ project structure
 
 This project provides tools and scripts necessary to build and test within a self-contained cytoscape installation.
 
-- Cytoscape apps are contained within the apps_ directory.
+- Cytoscape apps are contained within the apps_ directory.  Each app uses a similar project structure that allows rapid development, integration and deployment.
 - The cytoscape launch code run via Java Web Start is contained within launcher_ directory.
 - Build resources are contained within the resources_ directory.
 - The build environment's scripts are contained within the scripts_ directory.
