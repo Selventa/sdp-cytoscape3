@@ -118,6 +118,12 @@ function _15 {
     script "groovy-shell.sh" || return $?
 }
 
+function _16 {
+    echo "Generating idea..."
+    echo
+    script "idea.sh" || return $?
+}
+
 
 # Each menu option should stand alone on its own line.
 # Menu options correspond to functions above.
@@ -135,7 +141,8 @@ CHOICES=("${ACTIONS}clean${NONE}" \
          "${LIFECYCLE}debug${NONE}" \
          "${LIFECYCLE}stop${NONE}" \
          "${TOOLS}cytoscape log${NONE}" \
-         "${TOOLS}groovy shell${NONE}")
+         "${TOOLS}groovy shell${NONE}" \
+         "${TOOLS}generate idea${NONE}")
 
 if [ $# -gt 0 ]; then
     echo
