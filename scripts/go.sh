@@ -83,34 +83,41 @@ function _9 {
 }
 
 function _10 {
+    echo "Packaging sdp-cytoscape..."
+    echo
+    script "package.sh" || return $?
+}
+
+function _11 {
     echo "Start..."
     echo
     script "start.sh" || return $?
 }
 
-function _11 {
+function _12 {
     echo "Debug..."
     echo
     script "debug.sh" || return $?
 }
 
-function _12 {
+function _13 {
     echo "Stop..."
     echo
     script "stop.sh" || return $?
 }
 
-function _13 {
+function _14 {
     echo "Cytoscape log..."
     echo
     script "cytoscape-log.sh" || return $?
 }
 
-function _14 {
+function _15 {
     echo "Groovy shell..."
     echo
     script "groovy-shell.sh" || return $?
 }
+
 
 # Each menu option should stand alone on its own line.
 # Menu options correspond to functions above.
@@ -123,6 +130,7 @@ CHOICES=("${ACTIONS}clean${NONE}" \
          "${ACTIONS}loop (compile/test)${NONE}" \
          "${ACTIONS}loop (compile/deploy)${NONE}" \
          "${ACTIONS}loop (compile/test/deploy)${NONE}" \
+         "${ACTIONS}package${NONE}" \
          "${LIFECYCLE}start${NONE}" \
          "${LIFECYCLE}debug${NONE}" \
          "${LIFECYCLE}stop${NONE}" \
