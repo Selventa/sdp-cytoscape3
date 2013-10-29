@@ -24,7 +24,7 @@ configurations {
   compileTestJava.targetCompatibility = 1.7
 }
 
-new File('apps').eachDir { appDir ->
+new File("$System.env.DEV_APPS_DIR").eachDir { appDir ->
     task "clean-${appDir.name}" (type: GradleBuild) {
       buildFile = "${appDir}/build.gradle"
       tasks = ['clean']
