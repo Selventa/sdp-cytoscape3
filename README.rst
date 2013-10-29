@@ -21,6 +21,43 @@ This project provides tools and scripts necessary to build and test within a sel
 
 The build environment config is defined in env.sh_.  It provides a bash repl that allows the developer to run different steps of the build.  This is defined in go.sh_.
 
+development commands
+--------------------
+
+Use the go.sh_ script to run build commands during development.  Some important options are:
+
+- build
+
+  - builds the apps/distribution
+
+- test
+
+  - builds and test the apps/distribution
+
+- deploy
+
+  - deploy apps to tools/cytoscape
+
+- undeploy
+
+  - undeploy apps from tools/cytoscape
+
+- loop (compile/deploy)
+
+  - build and deploy apps to tools/cytoscape
+
+- package
+
+  - package the sdp-cytoscape distribution
+
+- start
+
+  - start cytoscape in tools/cytoscape
+
+- stop
+
+  - stop cytoscape in tools/cytoscape
+
 .. _OpenBEL Nav: https://github.com/OpenBEL/kam-nav
 .. _Model Builder: https://github.com/Selventa/model-builder
 .. _apps: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/apps
@@ -29,4 +66,4 @@ The build environment config is defined in env.sh_.  It provides a bash repl tha
 .. _scripts: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/scripts
 .. _tools: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/tools
 .. _env.sh: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/env.sh
-.. _go.sh: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/go.sh
+.. _go.sh: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/scripts/go.sh
