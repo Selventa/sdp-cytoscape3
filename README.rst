@@ -58,6 +58,21 @@ Use the go.sh_ script to run build commands during development.  Some important 
 
   - stop cytoscape in tools/cytoscape
 
+environment customisation
+-------------------------
+
+Scripts and tools are driven by environment variables in env.sh_.  Environment variables can be overriden in an ``env.sh.custom`` file that you must create (this file is ignored by git).
+
+You might want to do the following:
+
+- build a different set of apps
+
+  - set the ``DEV_APPS_DIR`` environment variable to your directory contains apps
+
+- use a different cytoscape installation to deploy apps into
+
+  - set the ``DEV_CY3_DIR`` environment variable to your cytoscape directory
+
 .. _OpenBEL Nav: https://github.com/OpenBEL/kam-nav
 .. _Model Builder: https://github.com/Selventa/model-builder
 .. _apps: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/apps

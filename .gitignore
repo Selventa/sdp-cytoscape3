@@ -3,6 +3,7 @@
 *.iws
 .gradle
 build
+env.sh.custom
 out
 tools/gradle
 tools/gradle-wrapper/*-bin
