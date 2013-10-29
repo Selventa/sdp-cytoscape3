@@ -26,35 +26,35 @@ development commands
 
 Use the go.sh_ script to run build commands during development.  Some important options are:
 
-- build
+- build_
 
   - builds the apps/distribution
 
-- test
+- test_
 
   - builds and test the apps/distribution
 
-- deploy
+- deploy_
 
   - deploy apps to tools/cytoscape
 
-- undeploy
+- undeploy_
 
   - undeploy apps from tools/cytoscape
 
-- loop (compile/deploy)
+- loop-deploy_
 
   - build and deploy apps to tools/cytoscape
 
-- package
+- package_
 
   - package the sdp-cytoscape distribution
 
-- start
+- start_
 
   - start cytoscape in tools/cytoscape
 
-- stop
+- stop_
 
   - stop cytoscape in tools/cytoscape
 
@@ -67,3 +67,11 @@ Use the go.sh_ script to run build commands during development.  Some important 
 .. _tools: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/tools
 .. _env.sh: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/env.sh
 .. _go.sh: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/scripts/go.sh
+.. _build: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/scripts/build.sh
+.. _test: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/scripts/test.sh
+.. _deploy: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/scripts/deploy.sh
+.. _undeploy: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/scripts/undeploy.sh
+.. _loop-deploy: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/scripts/loop-deploy.sh
+.. _package: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/scripts/package.sh
+.. _start: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/scripts/start.sh
+.. _stop: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/scripts/stop.sh
