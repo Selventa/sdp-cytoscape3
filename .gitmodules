@@ -1,8 +1,8 @@
 [submodule "apps/kam-nav"]
 	path = apps/kam-nav
 	url = git@github.com:OpenBEL/kam-nav.git
-	branch = experimental
+	branch = master
 [submodule "apps/model-builder"]
 	path = apps/model-builder
 	url = git@github.com:Selventa/model-builder.git
-	branch = experimental
+	branch = master
