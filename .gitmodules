@@ -6,3 +6,6 @@
 	path = apps/model-builder
 	url = git@github.com:Selventa/model-builder.git
 	branch = experimental
+[submodule "tools/getdown"]
+	path = tools/getdown
+	url = git@github.com:abargnesi/getdown.git
