@@ -1,0 +1,13 @@
+getdown.txt = 703308a1327d48172d87402ae1e2e672
+sdp-cytoscape3.jar = 8fb8024a63a4533e2ad2828b590f0098
+splash.png = 80c0e6bd58ad3477ae57ee9b405fc105
+java_linux_32.jar = 88433a52d5f26236b7ef51a8dc93a41b
+java_linux_32.jar = 88433a52d5f26236b7ef51a8dc93a41b
+java_linux_32.jar = 88433a52d5f26236b7ef51a8dc93a41b
+java_linux_64.jar = b23471c45a7a6473a211974d091f33b2
+java_linux_64.jar = b23471c45a7a6473a211974d091f33b2
+java_windows_32.jar = 6f8f35f7dc4df05cc38c5c93f86b6cad
+java_windows_64.jar = d67a01ece262a724ce3179c1789fedf1
+java_windows_64.jar = d67a01ece262a724ce3179c1789fedf1
+java_macosx_64.jar = 6d7905416969762d2bbc48c6e0468fd1
+digest.txt = 1c94950c196a2b308c2c78bb2cbc7757
