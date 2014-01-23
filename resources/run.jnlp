@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+"
+      codebase="http://cytoscape.selventa.com/"
+      href="run.jnlp">
+
+    <information>
+        <title>SDP Cytoscape 3</title>
+        <vendor>Selventa</vendor>
+        <homepage href="http://www.cytoscape.org"/>
+        <description>SDP Cytoscape 3</description>
+        <icon href="logo.png" width="256" height="256"/>
+        <offline-allowed/>
+        <shortcut online="true">
+           <desktop/>
+           <menu submenu="SDP Cytoscape 3"/>
+        </shortcut>
+    </information>
+
+    <security>
+        <all-permissions/>
+    </security>
+
+    <update check="timeout" policy="prompt-update"/>
+
+    <resources>
+        <j2se version="1.5+"/>
+        <jar href="getdown-latest.jar" main="true" />
+    </resources>
+
+    <application-desc main-class="com.threerings.getdown.launcher.Bootstrap">
+        <argument>http://cytoscape.selventa.com/</argument>
+    </application-desc>
+</jnlp>
