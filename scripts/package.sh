@@ -27,17 +27,26 @@ popd > /dev/null
 # package and sign launcher
 DEV_LAUNCHER_JAR="$DEV_DIR/build/libs/sdp-cytoscape3.jar"
 pushd "$DEV_DIR/build" > /dev/null
+    # build secure manifest
+    cp "$DIST_RESOURCES_DIR/MANIFEST.MF" "$DEV_DIR/build"
+    sed -i "s#\$DIST_NAME#$DIST_NAME#g" "$DEV_DIR/build/MANIFEST.MF"
+    sed -i "s#\$DIST_CODEBASE_URL#$DIST_CODEBASE_URL#g" "$DEV_DIR/build/MANIFEST.MF"
+
+    # build secure jnlp
+    cp "$DIST_RESOURCES_DIR"/jnlp/* "$DEV_DIR/build"
+    sed -i "s#CODEBASE_URL#$DIST_CODEBASE_URL#g" "$DIST_JNLP_FILE"
+    mkdir "$DEV_DIR/build/JNLP-INF"
+    cp "$DIST_JNLP_FILE" "$DEV_DIR/build/JNLP-INF/APPLICATION.JNLP"
+
     # package
+    jar -ufm "$DEV_LAUNCHER_JAR" "$DEV_DIR/build/MANIFEST.MF"
+    jar -uf "$DEV_LAUNCHER_JAR" $(basename "$DEV_DIR/build/JNLP-INF")
     jar -uf "$DEV_LAUNCHER_JAR" "cytoscape.zip"
 
     # sign
     jarsigner -keystore  "$DIST_KEYSTORE_FILE" \
               -storepass "$DIST_KEYSTORE_PASS" \
+              -tsa "http://tsa.starfieldtech.com" \
               "$DEV_LAUNCHER_JAR" "$DIST_SIGNING_ALIAS"
 
-    # copy jnlp resources
-    cp "$DIST_RESOURCES_DIR"/jnlp/* "$DEV_DIR/build"
-
-    # set codebase
-    sed -i "s#CODEBASE_URL#$DIST_CODEBASE_URL#g" *.jnlp
 popd > /dev/null
