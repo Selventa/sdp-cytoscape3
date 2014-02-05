@@ -9,8 +9,6 @@ if [ -z "$DIST_CODEBASE_URL" ]; then
     exit 1
 fi
 
-CODEBASE_URL=$1
-
 # build apps and launcher
 gradle clean build
 

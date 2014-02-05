@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+"
+      codebase="$DIST_CODEBASE_URL"
+      href="cytoscape3.jnlp">
+
+    <information>
+        <title>$DIST_NAME</title>
+        <vendor>Selventa</vendor>
+        <homepage href="http://www.cytoscape.org"/>
+        <description>$DIST_DESCRIPTION</description>
+        <icon href="logo.png" width="256" height="256"/>
+        <offline-allowed/>
+        <shortcut online="true">
+           <desktop/>
+           <menu submenu="$DIST_NAME"/>
+        </shortcut>
+    </information>
+
+    <security>
+        <all-permissions/>
+    </security>
+
+    <update check="timeout" policy="prompt-update"/>
+
+    <resources>
+        <j2se version="1.5+"/>
+        <jar href="getdown-latest.jar" main="true" />
+    </resources>
+
+    <application-desc main-class="com.threerings.getdown.launcher.Bootstrap">
+        <argument>sdp-cytoscape3</argument>
+        <argument>$DIST_CODEBASE_URL</argument>
+    </application-desc>
+</jnlp>
