@@ -23,7 +23,7 @@ echo ""
 
 echo "Packaging"
 echo "---------"
-"$DEV_SCRIPTS_DIR"/package-getdown.sh || exit 1
+"$DEV_SCRIPTS_DIR"/package.sh || exit 1
 echo "---------"
 echo ""
 
