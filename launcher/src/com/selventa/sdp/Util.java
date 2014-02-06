@@ -35,6 +35,9 @@ public class Util {
     public static boolean windows = System.getProperty("os.name").toLowerCase()
             .indexOf("win") >= 0;
 
+    public static boolean macos = System.getProperty("os.name").toLowerCase().indexOf("mac os") != -1 ||
+        System.getProperty("os.name").toLowerCase().indexOf("macos") != -1;
+
     public static void makeExecutable(File f) {
         f.setExecutable(true, false);
     }

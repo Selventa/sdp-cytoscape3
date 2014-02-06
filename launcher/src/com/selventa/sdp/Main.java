@@ -5,6 +5,7 @@ import static com.selventa.sdp.Util.extract;
 import static com.selventa.sdp.Util.makeExecutable;
 import static com.selventa.sdp.Util.resource;
 import static com.selventa.sdp.Util.windows;
+import static com.selventa.sdp.Util.macos;
 import static java.lang.String.format;
 import static java.lang.System.getProperty;
 import static java.nio.file.Paths.get;
@@ -166,6 +167,12 @@ public class Main {
         if (localJvmPresent(new File(INSTALL_FOLDER))) {
             String JAVA_HOME = Paths.get(INSTALL_FOLDER, "java_vm").toString();
             log.info(format("Local JVM exists, courtesy of getdown - %s", JAVA_HOME));
+
+            if (macos) {
+                makeExecutable(get(JAVA_HOME, "bin", "java").toFile());
+                makeExecutable(get(JAVA_HOME, "bin", "javaw").toFile());
+            }
+
             Map<String,String> env = bldr.environment();
             env.put("JAVA_HOME", JAVA_HOME);
             log.info(format("Set JAVA_HOME to local JVM - %s", JAVA_HOME));
