@@ -20,7 +20,7 @@
         <all-permissions/>
     </security>
 
-    <update check="timeout" policy="prompt-update"/>
+    <update check="always" policy="always" />
 
     <resources>
         <j2se version="1.5+"/>

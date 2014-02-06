@@ -26,11 +26,6 @@ export DEV_BUILD_FILE="${DEV_BUILD_FILE:=$DEV_DIR/build.gradle}"
 export DEV_CY3_LOG_FILE="${DEV_CY3_LOG_FILE:=$DEV_CY3_WORK_DIR/cytoscape.log}"
 alias gradle="${DEV_SCRIPTS_DIR}/gradlew --daemon"
 
-# -- Tools --
-export TOOLS_DIR="${TOOLS_DIR:=$DEV_DIR/tools}"
-export TOOLS_GETDOWN_DIR="${TOOLS_GETDOWN_DIR:=$TOOLS_DIR/getdown}"
-export TOOLS_GETDOWN_JAR_FILE="${TOOLS_GETDOWN_JAR_FILE:=$TOOLS_GETDOWN_DIR/target/getdown-1.4-SNAPSHOT.jar}"
-
 # -- Distribution --
 export DIST_DIR="${DIST_DIR:=$DIR}"
 export DIST_RESOURCES_DIR="${DIST_RESOURCES_DIR:=$DIST_DIR/resources}"
@@ -47,3 +42,11 @@ export DIST_SIGNING_ALIAS="signing"
 export DIST_KEYSTORE_PASS="thisislooney"
 export DIST_KEYSTORE_FILE="${DIST_KEYSTORE_FILE:=$DIST_RESOURCES_DIR/signing/keystore}"
 
+# -- Tools --
+export TOOLS_DIR="${TOOLS_DIR:=$DEV_DIR/tools}"
+export TOOLS_GETDOWN_DIR="${TOOLS_GETDOWN_DIR:=$TOOLS_DIR/getdown}"
+export TOOLS_GETDOWN_JAR_FILE="${TOOLS_GETDOWN_JAR_FILE:=$TOOLS_GETDOWN_DIR/target/getdown-1.4-SNAPSHOT.jar}"
+
+# -- Project files --
+export PROJ_CHANGELOG="${PROJ_CHANGELOG:=$DIR/CHANGELOG.rst}"
+export PROJ_STYLE="${PROJ_STYLE:=$DIST_RESOURCES_DIR/css/style.css}"

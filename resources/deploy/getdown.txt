@@ -1,7 +1,8 @@
 appbase = $DIST_CODEBASE_URL
 ui.name = $DIST_NAME
 ui.background_image = splash.png
-ui.patch_notes_url = $DIST_CODEBASE_URL
+ui.patch_notes = 50, 300, 200, 50
+ui.patch_notes_url = $DIST_CODEBASE_URL/release-notes.html
 code = sdp-cytoscape3.jar
 class = com.selventa.sdp.Main
 resource = splash.png
