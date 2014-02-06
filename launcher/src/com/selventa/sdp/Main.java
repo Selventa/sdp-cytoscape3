@@ -145,7 +145,12 @@ public class Main {
     private static Process makeProcess(File workingDirectory, File scriptFile, Log log) throws IOException {
         final ProcessBuilder bldr = new ProcessBuilder().directory(workingDirectory);
         if (windows) {
-            bldr.command("cmd", "/c", "start", scriptFile.getAbsolutePath());
+            String osName = System.getProperty("os.name");
+            if (osName.indexOf("9") != -1 || osName.indexOf("Me") != -1) {
+                bldr.command("command.com", "/c", "start", scriptFile.getAbsolutePath());
+            } else {
+                bldr.command("cmd.exe", "/c", "start", scriptFile.getAbsolutePath());
+            }
         } else {
             String term = System.getenv(TERMINAL_ENV);
             if (term != null) {
