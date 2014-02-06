@@ -92,6 +92,14 @@ jarsigner -keystore  "$DIST_KEYSTORE_FILE" \
 echo "...copying $DIST_GETDOWN_BUILD_JAR to $DEV_BUILD_DIR/deploy"
 cp "$DIST_GETDOWN_BUILD_JAR" "$DEV_BUILD_DIR/deploy"
 
+echo "...generating changelog to include $DIST_NAME / $DIST_VERSION"
+HAS_DOCUTILS=$(hash rst2html > /dev/null 2>&1)
+if [ $? -ne 0 ]; then
+    echo "rst2html cannot not be found; install docutils" 1>&2;
+    exit 1
+fi
+rst2html --stylesheet-path="${PROJ_STYLE}" "${PROJ_CHANGELOG}" > "$DEV_BUILD_DIR/deploy/changelog.html"
+
 echo "...generating local digest.txt"
 java -cp "$DIST_GETDOWN_BUILD_JAR" com.threerings.getdown.tools.Digester "$DEV_BUILD_DIR/deploy"
 
