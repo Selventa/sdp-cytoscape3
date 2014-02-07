@@ -64,7 +64,7 @@ goto :EOF
 
 :: This is probably wrong.  We don't really want the user to be in this directory, do we?
 cd framework
-bin/karaf %1 %2 %3 %4 %5 %6 %7 %8
+bin/karaf %1 %2 %3 %4 %5 %6 %7 %8 >> %USERPROFILE%\CytoscapeConfiguration\3\framework-cytoscape.log 2<&1
 
 :: Modified: pop to the original directory
 pushd "%~dp0"
