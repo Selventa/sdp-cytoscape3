@@ -52,10 +52,6 @@ public class Main {
      * {@link Util#windows}.
      */
     private static final String KARAF_SCRIPT;
-    /**
-     * Environment variable for terminal setting (unix / linux).
-     */
-    private static final String TERMINAL_ENV = "TERMINAL";
 
     /**
      * Compute os-independent values.
@@ -153,14 +149,7 @@ public class Main {
                 bldr.command("cmd.exe", "/c", scriptFile.getAbsolutePath());
             }
         } else {
-            String term = System.getenv(TERMINAL_ENV);
-            if (term != null) {
-                log.dbug(format("TERMINAL env set as %s", term));
-                bldr.command(term, "-e", scriptFile.getAbsolutePath());
-            } else {
-                log.dbug(format("TERMINAL env not set", term));
-                bldr.command(scriptFile.getAbsolutePath());
-            }
+            bldr.command(scriptFile.getAbsolutePath());
         }
         log.info(format("Set process command to - %s", Arrays.toString(bldr.command().toArray())));
 
