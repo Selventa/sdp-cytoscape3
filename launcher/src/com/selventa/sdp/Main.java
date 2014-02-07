@@ -150,7 +150,7 @@ public class Main {
             if (osName.indexOf("9") != -1 || osName.indexOf("Me") != -1) {
                 bldr.command("command.com", "/c", "start", scriptFile.getAbsolutePath());
             } else {
-                bldr.command("cmd.exe", "/c", "start", scriptFile.getAbsolutePath());
+                bldr.command("cmd.exe", "/c", scriptFile.getAbsolutePath());
             }
         } else {
             String term = System.getenv(TERMINAL_ENV);
