@@ -14,6 +14,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import java.io.*;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -86,16 +87,20 @@ public class Main {
      */
     public static void main(String[] args) {
         // log the machine launching...
+        String addr = "N/A";
+        String host = "N/A";
+
         try {
-            String addr = InetAddress.getLocalHost().getHostAddress();
-            String host = InetAddress.getLocalHost().getCanonicalHostName();
-            log.warn(format(LAUNCH_LOG, addr, host, getProperty("user.home"),
-                    getProperty("user.dir"), getProperty("user.timezone"),
-                    getProperty("file.encoding"), getProperty("os.name"),
-                    getProperty("os.arch"), getProperty("os.version"),
-                    getProperty("java.vm.name"), getProperty("java.vm.vendor"),
-                    getProperty("java.vm.info"), getProperty("java.version")));
-        } catch (IOException excp) {/* could not log, oh well, move on */}
+            addr = InetAddress.getLocalHost().getHostAddress();
+            host = InetAddress.getLocalHost().getCanonicalHostName();
+        } catch (UnknownHostException _) {}
+
+        log.warn(format(LAUNCH_LOG, addr, host, getProperty("user.home"),
+                getProperty("user.dir"), getProperty("user.timezone"),
+                getProperty("file.encoding"), getProperty("os.name"),
+                getProperty("os.arch"), getProperty("os.version"),
+                getProperty("java.vm.name"), getProperty("java.vm.vendor"),
+                getProperty("java.vm.info"), getProperty("java.version")));
 
 	    File cypath = new File(INSTALL_FOLDER);
 	    if (!cypath.exists()) {
