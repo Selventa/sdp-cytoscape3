@@ -16,7 +16,6 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -181,7 +180,7 @@ public class Main {
         log.info(format("Set process command to - %s", Arrays.toString(bldr.command().toArray())));
 
         if (localJvmPresent(new File(INSTALL_FOLDER))) {
-            String JAVA_HOME = Paths.get(INSTALL_FOLDER, "java_vm").toString();
+            String JAVA_HOME = get(INSTALL_FOLDER, "java_vm").toString();
             log.info(format("Local JVM exists, courtesy of getdown - %s", JAVA_HOME));
 
             if (macos) {
