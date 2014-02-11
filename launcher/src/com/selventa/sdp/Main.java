@@ -1,8 +1,9 @@
 package com.selventa.sdp;
 
+import org.apache.log4j.Logger;
+
 import static com.selventa.sdp.Util.equalMD5;
 import static com.selventa.sdp.Util.extract;
-import static com.selventa.sdp.Util.makeExecutable;
 import static com.selventa.sdp.Util.resource;
 import static com.selventa.sdp.Util.windows;
 import static com.selventa.sdp.Util.macos;
@@ -12,6 +13,7 @@ import static java.nio.file.Paths.get;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -26,6 +28,17 @@ import java.util.Map;
  * alongside this distribution.
  */
 public class Main {
+
+    /**
+     * Logger for launch debugging.
+     */
+    private static final Logger log = Logger.getRootLogger();
+
+    private static final String LAUNCH_LOG = "Launching sdp-cytoscape3..." +
+            "ip: %s" + ", host: %s" + ", user.home: %s" + ", user.dir: %s" +
+            ", user.timezone: %s" + ", file.encoding: %s" + ", os.name: %s" +
+            ", os.arch: %s" + ", os.version: %s" + ", java.vm.name: %s" +
+            ", java.vm.vendor: %s" + ", java.vm.info: %s" + ", java.version: %s";
 
     /**
      * Root directory where this Cytoscape distribution will exist.
@@ -70,18 +83,32 @@ public class Main {
      * Configure and fork the cytoscape process in an os-dependent manner.
      *
      * @param args {@code String[]}
-     * @throws IOException when an IO error occurs reading, writing, or
-     * starting the Cytoscape process
-     * @throws InterruptedException when this process is interrupted waiting
-     * for the Cytoscape process to finish
      */
     public static void main(String[] args) {
+        // log the machine launching...
+        try {
+            String addr = InetAddress.getLocalHost().getHostAddress();
+            String host = InetAddress.getLocalHost().getCanonicalHostName();
+            log.warn(format(LAUNCH_LOG, addr, host, getProperty("user.home"),
+                    getProperty("user.dir"), getProperty("user.timezone"),
+                    getProperty("file.encoding"), getProperty("os.name"),
+                    getProperty("os.arch"), getProperty("os.version"),
+                    getProperty("java.vm.name"), getProperty("java.vm.vendor"),
+                    getProperty("java.vm.info"), getProperty("java.version")));
+        } catch (IOException excp) {/* could not log, oh well, move on */}
+
 	    File cypath = new File(INSTALL_FOLDER);
 	    if (!cypath.exists()) {
 	        cypath.mkdirs();
+            if (!cypath.exists()) {
+                log.error(format("Installation folder does not exist - %s", cypath.getAbsolutePath()));
+            } else if (!cypath.canRead()) {
+                log.error(format("Installation folder cannot be read from - %s", cypath.getAbsolutePath()));
+            } else if (!cypath.canWrite()) {
+                log.error(format("Installation folder cannot be written to - %s", cypath.getAbsolutePath()));
+            }
 	    }
 
-        final Log log = new Log(new File(cypath, "scy3-launch.log"));
         log.info(format("Setup installation folder - %s", cypath.getAbsolutePath()));
 
 	    File onDiskZip = new File(cypath, CY_ZIP);
@@ -107,21 +134,16 @@ public class Main {
                 extract(onDiskZip, cypath);
                 log.info("Successfully updated to latest zip file");
             } catch (IOException e) {
-                log.fail(format("Failure to replace zip file - %s", onDiskZip.getAbsolutePath()));
-                log.fail("Launch continuing with old cytoscape installation");
+                log.error(format("Failure to replace zip file - %s", onDiskZip.getAbsolutePath()), e);
+                log.error("Launch continuing with old cytoscape installation");
             }
 	    } else {
             log.info(format("Existing zip file is the latest - %s", onDiskZip.getAbsolutePath()));
         }
 
-        File execFile = get(cypath.getAbsolutePath(), CY_FOLDER,
-                SCRIPT).toFile();
-        makeExecutable(execFile);
-        log.dbug(format("Set executable for file - %s", execFile.getAbsolutePath()));
-        File karafFile = get(cypath.getAbsolutePath(), CY_FOLDER,
-                KARAF_SCRIPT).toFile();
-        makeExecutable(karafFile);
-        log.dbug(format("Set executable for file - %s", karafFile.getAbsolutePath()));
+        File execFile = get(cypath.getAbsolutePath(), CY_FOLDER, SCRIPT).toFile();
+        setExecutable(execFile);
+        setExecutable(get(cypath.getAbsolutePath(), CY_FOLDER, KARAF_SCRIPT).toFile());
 
         File wd = get(cypath.getAbsolutePath(), CY_FOLDER).toFile();
         final Process process;
@@ -132,18 +154,18 @@ public class Main {
             log.info(format("Process ended, happily? (code %d)", code));
             System.exit(code);
         } catch (IOException e) {
-            log.fail(format("Cannot start process; exiting (code 100)"));
+            log.error(format("Cannot start process; exiting (code 100)"), e);
             System.exit(100);
         } catch (InterruptedException e) {
-            log.fail("Process interrupted", e);
+            log.error("Process interrupted", e);
         }
     }
 
-    private static Process makeProcess(File workingDirectory, File scriptFile, Log log) throws IOException {
+    private static Process makeProcess(File workingDirectory, File scriptFile, Logger log) throws IOException {
         final ProcessBuilder bldr = new ProcessBuilder().directory(workingDirectory);
         if (windows) {
             String osName = System.getProperty("os.name");
-            if (osName.indexOf("9") != -1 || osName.indexOf("Me") != -1) {
+            if (osName.contains("9") || osName.contains("Me")) {
                 bldr.command("command.com", "/c", "start", scriptFile.getAbsolutePath());
             } else {
                 bldr.command("cmd.exe", "/c", scriptFile.getAbsolutePath());
@@ -158,8 +180,8 @@ public class Main {
             log.info(format("Local JVM exists, courtesy of getdown - %s", JAVA_HOME));
 
             if (macos) {
-                makeExecutable(get(JAVA_HOME, "bin", "java").toFile());
-                makeExecutable(get(JAVA_HOME, "bin", "javaw").toFile());
+                setExecutable(get(JAVA_HOME, "bin", "java").toFile());
+                setExecutable(get(JAVA_HOME, "bin", "javaw").toFile());
             }
 
             Map<String,String> env = bldr.environment();
@@ -174,5 +196,15 @@ public class Main {
 
     private static boolean localJvmPresent(File directory) {
         return new File(directory, "java_vm").exists();
+    }
+
+    private static void setExecutable(File f) {
+        if (f.setExecutable(true, false)) {
+            log.debug(format("Set executable bit for file - %s", f.getAbsolutePath()));
+        } else {
+            log.error(format("Failure to set executable bit for file - %s", f.getAbsolutePath()));
+            log.error(format("File status, exists: %s, readable: %s, writable: %s, hidden: %s",
+                      f.exists(), f.canRead(), f.canWrite(), f.isHidden()));
+        }
     }
 }

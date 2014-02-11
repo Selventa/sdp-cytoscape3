@@ -3,16 +3,12 @@ package com.selventa.sdp;
 import static java.lang.Integer.toHexString;
 import static java.util.Objects.requireNonNull;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.zip.ZipEntry;
@@ -32,20 +28,11 @@ public class Util {
     /**
      * {@code true} if the platform is Windows; {@code false} otherwise.
      */
-    public static boolean windows = System.getProperty("os.name").toLowerCase()
-            .indexOf("win") >= 0;
+    public static boolean windows = System.getProperty("os.name").toLowerCase().contains("win");
 
-    public static boolean macos = System.getProperty("os.name").toLowerCase().indexOf("mac os") != -1 ||
-        System.getProperty("os.name").toLowerCase().indexOf("macos") != -1;
-
-    public static void makeExecutable(File f) {
-        f.setExecutable(true, false);
-    }
-
-    public static File sdpCytoscapeLocation() {
-        return new File(System.getProperty("user.home") + File.separator
-                + "sdp-cytoscape");
-    }
+    public static boolean macos =
+            System.getProperty("os.name").toLowerCase().contains("mac os") ||
+            System.getProperty("os.name").toLowerCase().contains("macos");
 
     public static boolean equalMD5(InputStream is1, InputStream is2)
             throws IOException {
@@ -59,11 +46,9 @@ public class Util {
      * <p>
      * The {@link InputStream} is left open for the caller to manage.
      *
-     * @param is
-     *            {@link InputStream}
+     * @param is {@link InputStream}
      * @return {@link String}
-     * @throws IOException
-     *             when an IO error occurs reading from {@code is}
+     * @throws IOException when an IO error occurs reading from {@code is}
      */
     public static String md5(InputStream is) throws IOException {
         requireNonNull(is);
@@ -77,8 +62,8 @@ public class Util {
             byte[] mdbytes = md5.digest();
 
             StringBuilder b = new StringBuilder(32);
-            for (int i = 0; i < mdbytes.length; i++) {
-                b.append(toHexString(0xFF & mdbytes[i]));
+            for (byte mdbyte : mdbytes) {
+                b.append(toHexString(0xFF & mdbyte));
             }
             return b.toString();
         } finally {
@@ -96,8 +81,7 @@ public class Util {
      * A {@code null} is returned if the resource at {@link String
      * classpathLocation} does not exist.
      *
-     * @param classpathLocation
-     *            {@link String}
+     * @param classpathLocation {@link String}
      * @return {@link InputStream}
      */
     public static InputStream resource(String classpathLocation) {
@@ -121,7 +105,7 @@ public class Util {
                     "dest directory cannot be written to");
 
         try (ZipInputStream in = new ZipInputStream(new FileInputStream(source))) {
-            ZipEntry entry = null;
+            ZipEntry entry;
 
             while ((entry = in.getNextEntry()) != null) {
                 String name = entry.getName();
@@ -141,37 +125,5 @@ public class Util {
         }
     }
 
-    public static void appendIfMissing(String line, File f) throws IOException {
-        if (f == null) throw new NullPointerException();
-        if (!f.canRead() || !f.canWrite())
-            throw new IllegalStateException(
-                    "Cannot read / write to "+ f.getAbsolutePath());
-
-        // does the file contain the line in question?...
-        BufferedReader r = null;
-        try {
-            r = new BufferedReader(new FileReader(f));
-            String l = null;
-            while ((l = r.readLine()) != null) {
-                if (l.equals(line)) return;
-            }
-        } finally {
-            if (r != null)
-                r.close();
-        }
-
-        // no, so append it
-        PrintWriter w = null;
-        try {
-            w = new PrintWriter(new FileWriter(f, true));
-            w.println(line);
-        } finally {
-            if (w != null)
-                w.close();
-        }
-    }
-
-    private Util() {
-
-    }
+    private Util() { /* static accessors only */ }
 }
