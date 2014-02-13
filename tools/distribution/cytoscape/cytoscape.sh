@@ -49,4 +49,4 @@ export KARAF_OPTS=-Xms128M\ -Dcom.sun.management.jmxremote\ -Dcytoscape.home="$C
 export KARAF_DATA="${HOME}/CytoscapeConfiguration/3/karaf_data"
 mkdir -p "${KARAF_DATA}/tmp"
 
-$script_path/framework/bin/karaf "$@" >> "$HOME/CytoscapeConfiguration/3/framework-cytoscape.log" 2>&1
+$script_path/framework/bin/karaf "$@" >> "$HOME/sdp-cytoscape3/cytoscape-error.log" 2>&1
