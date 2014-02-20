@@ -46,11 +46,18 @@ echo "...copying $DEV_BUILD_DIR/libs/sdp-cytoscape3.jar to $DEV_BUILD_DIR/deploy
 cp "$DEV_BUILD_DIR/libs/sdp-cytoscape3.jar" "$DEV_BUILD_DIR/deploy"
 
 # build getdown from tools dir
-echo "...building getdown"
+echo "...building samskivert + getdown"
+pushd "$TOOLS_SAMSKIVERT_DIR" > /dev/null
+    mvn -q clean install -DskipTests > /dev/null
+    if [ "$?" != "0" ]; then
+        echo "...samskivert build failed"
+        exit 1
+    fi
+popd > /dev/null
 pushd "$TOOLS_GETDOWN_DIR" > /dev/null
     mvn -q clean package > /dev/null
     if [ "$?" != "0" ]; then
-        echo "...build failed"
+        echo "...getdown build failed"
         exit 1
     fi
 popd > /dev/null

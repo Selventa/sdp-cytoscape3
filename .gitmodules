@@ -10,3 +10,7 @@
 	path = tools/getdown
 	url = git@github.com:abargnesi/getdown.git
     branch = master
+[submodule "tools/samskivert"]
+	path = tools/samskivert
+	url = git@github.com:abargnesi/samskivert.git
+    branch = master

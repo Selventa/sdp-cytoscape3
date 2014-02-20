@@ -45,6 +45,7 @@ export DIST_KEYSTORE_FILE="${DIST_KEYSTORE_FILE:=$DIST_RESOURCES_DIR/signing/key
 # -- Tools --
 export TOOLS_DIR="${TOOLS_DIR:=$DEV_DIR/tools}"
 export TOOLS_GETDOWN_DIR="${TOOLS_GETDOWN_DIR:=$TOOLS_DIR/getdown}"
+export TOOLS_SAMSKIVERT_DIR="${TOOLS_GETDOWN_DIR:=$TOOLS_DIR/samskivert}"
 export TOOLS_GETDOWN_JAR_FILE="${TOOLS_GETDOWN_JAR_FILE:=$TOOLS_GETDOWN_DIR/target/getdown-1.4-SNAPSHOT.jar}"
 
 # -- Project files --
