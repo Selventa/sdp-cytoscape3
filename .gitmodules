@@ -14,3 +14,7 @@
 	path = tools/samskivert
 	url = git@github.com:abargnesi/samskivert.git
     branch = master
+[submodule "tools/s3cmd"]
+	path = tools/s3cmd
+	url = https://github.com/s3tools/s3cmd.git
+    branch = master
