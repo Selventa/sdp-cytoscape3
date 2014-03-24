@@ -90,11 +90,19 @@ cp "$DEV_BUILD_DIR/deploy/cytoscape3.jnlp" "$DEV_BUILD_DIR/JNLP-INF/APPLICATION.
 jar -uf "$DIST_GETDOWN_BUILD_JAR" -C "$DEV_BUILD_DIR" "JNLP-INF"
 
 # sign
-echo "...signing "
+echo "...signing"
 jarsigner -keystore  "$DIST_KEYSTORE_FILE" \
           -storepass "$DIST_KEYSTORE_PASS" \
           -tsa "http://tsa.starfieldtech.com" \
           "$DIST_GETDOWN_BUILD_JAR" "$DIST_SIGNING_ALIAS"
+if [ "$?" != "0" ]; then
+    exit 1
+fi
+echo "...verifying signature"
+jarsigner -verify -strict "$DIST_GETDOWN_BUILD_JAR"
+if [ "$?" != "0" ]; then
+    exit 1
+fi
 
 echo "...copying $DIST_GETDOWN_BUILD_JAR to $DEV_BUILD_DIR/deploy"
 cp "$DIST_GETDOWN_BUILD_JAR" "$DEV_BUILD_DIR/deploy"
