@@ -39,8 +39,8 @@ export DIST_CODEBASE_URL="${DIST_CODEBASE_URL:=http://cytoscape.selventa.com/}"
 export DIST_JNLP_FILE="${DIST_JNLP_FILE:=$DIST_RESOURCES_DIR/jnlp/cytoscape3.jnlp}"
 export DIST_GETDOWN_BUILD_JAR="${DIST_GETDOWN_BUILD_JAR:=$DEV_BUILD_DIR/getdown-latest.jar}"
 export DIST_SIGNING_ALIAS="signing"
-export DIST_KEYSTORE_PASS="thisislooney"
-export DIST_KEYSTORE_FILE="${DIST_KEYSTORE_FILE:=$DIST_RESOURCES_DIR/signing/keystore}"
+export DIST_KEYSTORE_PASS="WZTg0pvnwDy560ZdGd%RA5CjAjo*%S"
+export DIST_KEYSTORE_FILE="${DIST_KEYSTORE_FILE:=$DIST_RESOURCES_DIR/signing/signing.jks}"
 
 # -- Tools --
 export TOOLS_DIR="${TOOLS_DIR:=$DEV_DIR/tools}"
