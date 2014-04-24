@@ -1,6 +1,10 @@
 Changelog
 =========
 
+- `Version 1.2.0`_
+    - New Feature:
+        - Validation of BEL nodes and edges
+
 - `Version 1.1.0`_
     - New Feature:
         - KamNav Configuration
@@ -13,6 +17,15 @@ Changelog
 - `Version 1.0.0`_
     - Enhancements:
         - New deployment technique.
+
+Version 1.2.0
+=============
+
+    - New Feature:
+        - Validation of BEL nodes and edges of a network
+            - Summary dialog provides percentages of valid and invalid BEL
+            - Added columns 'valid bel' and 'validation error' to node and edge tables
+            - Visualize invalid nodes and edges as red
 
 Version 1.1.0
 =============
