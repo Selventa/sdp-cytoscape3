@@ -5,7 +5,7 @@ A distribution of cytoscape3 apps for model building with the SDP.  The cytoscap
 
 It includes the following apps:
 
-- `OpenBEL Nav`_: Explore knowledge networks
+- `OpenBEL Navigator`_: Explore knowledge networks
 - `Model Builder`_: Build biological networks with supporting data from knowledge networks.
 
 project structure
@@ -77,7 +77,7 @@ You might want to do the following:
 
   - set the ``DEV_CY3_LOG_FILE`` environment variable to the log file path
 
-.. _OpenBEL Nav: https://github.com/OpenBEL/kam-nav
+.. _OpenBEL Navigator: https://github.com/OpenBEL/kam-nav
 .. _Model Builder: https://github.com/Selventa/model-builder
 .. _apps: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/apps
 .. _launcher: https://github.com/Selventa/sdp-cytoscape3/tree/experimental/launcher
