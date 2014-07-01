@@ -1,6 +1,10 @@
 Changelog
 =========
 
+- `Version 1.3.1`_
+    - Fixes:
+        - Fix model metadata bug
+
 - `Version 1.3.0`_
     - Enhancements:
         - Improved Search Nodes
@@ -25,6 +29,12 @@ Changelog
 - `Version 1.0.0`_
     - Enhancements:
         - New deployment technique.
+
+Version 1.3.1
+=============
+
+    - Fixes:
+        - Choose correct type for model metadata column based on data values.
 
 Version 1.3.0
 =============
