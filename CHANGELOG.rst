@@ -1,6 +1,14 @@
 Changelog
 =========
 
+- `Version 1.3.0`_
+    - Enhancements:
+        - Improved Search Nodes
+        - Improved usability of Evidence panel
+        - Provide BEL statement as edge name
+    - Fixes:
+        - Fixed setting of "bel.function" column
+
 - `Version 1.2.0`_
     - New Feature:
         - Validation of BEL nodes and edges
@@ -17,6 +25,23 @@ Changelog
 - `Version 1.0.0`_
     - Enhancements:
         - New deployment technique.
+
+Version 1.3.0
+=============
+
+    - Enhancements:
+        - Improved Search Nodes
+            - Supports wildcard ``*`` anywhere in entity (e.g. ``*kt``, ``mapk*``, ``*aging*``)
+            - Case-insensitive search on entity
+            - Search across *All* namespaces (**now the default**)
+        - Improved usability of Evidence panel
+            - The annotation table wraps text and allows easier selection for copy/paste
+        - Provide BEL statement as edge name
+            - Edge names are set as a BEL statement
+            - Loading models will compute edge name from [source, rel, target]
+            - Retrieve edges from knowledge network will set edge name
+    - Fixes:
+        - Fixed "bel.function" to be set correctly when building model nodes from scratch
 
 Version 1.2.0
 =============
