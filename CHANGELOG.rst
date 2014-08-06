@@ -1,34 +1,14 @@
 Changelog
 =========
 
-- `Version 1.3.1`_
+
+
+Version 1.3.2
+=============
+
     - Fixes:
-        - Fix model metadata bug
-
-- `Version 1.3.0`_
-    - Enhancements:
-        - Improved Search Nodes
-        - Improved usability of Evidence panel
-        - Provide BEL statement as edge name
-    - Fixes:
-        - Fixed setting of "bel.function" column
-
-- `Version 1.2.0`_
-    - New Feature:
-        - Validation of BEL nodes and edges
-
-- `Version 1.1.0`_
-    - New Feature:
-        - KamNav Configuration
-    - Enhancements:
-        - Knowledge Neighborhood
-        - Performance of loading supporting evidence
-    - Fixes:
-        - `bug #20`_
-
-- `Version 1.0.0`_
-    - Enhancements:
-        - New deployment technique.
+        - Forbid overwriting model on save if revisions conflict (`bug #563`_)
+        - Provide useful error messages when configuring SDP access in cytoscape (`enhancement #564`_)
 
 Version 1.3.1
 =============
@@ -83,3 +63,5 @@ Version 1.0.0
     - Supplement Java Webstart deployment with getdown deployment.  This provides a more reliable update procedure and distributes the correct Java runtime per client.
 
 .. _bug #20: https://github.com/OpenBEL/kam-nav/issues/20
+.. _bug #563: https://redmine.selventa.com/issues/563
+.. _enhancement #564: https://redmine.selventa.com/issues/564
