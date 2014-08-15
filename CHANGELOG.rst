@@ -3,6 +3,12 @@ Changelog
 
 
 
+Version 1.3.3
+=============
+
+    - Fixes:
+        - Fix incorrect association of metadata on import of model (`bug #541`_)
+
 Version 1.3.2
 =============
 
@@ -64,4 +70,5 @@ Version 1.0.0
 
 .. _bug #20: https://github.com/OpenBEL/kam-nav/issues/20
 .. _bug #563: https://redmine.selventa.com/issues/563
+.. _bug #541: https://redmine.selventa.com/issues/541
 .. _enhancement #564: https://redmine.selventa.com/issues/564
