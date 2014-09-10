@@ -3,6 +3,19 @@ Changelog
 
 
 
+Version 1.3.5
+=============
+
+    - Fixes:
+        - Load additional search results as needed in *Import Model*, *Add Comparison*, and *Add Rcr Result* dialogs (`bug #580`_)
+    - Enhancements:
+        - UI improvements to *Import Model*, *Add Comparison*, and *Add Rcr Result* dialogs:
+           - Better layout
+           - Added column control to show/hide columns
+           - Added ``Description`` column
+           - Wrap text columns as needed
+           - Find text in search results (Key: ``Control + F``)
+
 Version 1.3.4
 =============
 
@@ -81,3 +94,4 @@ Version 1.0.0
 .. _bug #569: https://redmine.selventa.com/issues/569
 .. _bug #570: https://redmine.selventa.com/issues/570
 .. _enhancement #564: https://redmine.selventa.com/issues/564
+.. _bug #580: https://redmine.selventa.com/issues/580
