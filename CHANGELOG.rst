@@ -3,6 +3,12 @@ Changelog
 
 
 
+Version 1.3.6
+=============
+
+    - Fixes (regression):
+        - Search by species in Import Model (`bug #608`_)
+
 Version 1.3.5
 =============
 
@@ -95,3 +101,4 @@ Version 1.0.0
 .. _bug #570: https://redmine.selventa.com/issues/570
 .. _enhancement #564: https://redmine.selventa.com/issues/564
 .. _bug #580: https://redmine.selventa.com/issues/580
+.. _bug #608: https://redmine.selventa.com/issues/608
