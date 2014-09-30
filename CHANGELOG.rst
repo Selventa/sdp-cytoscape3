@@ -3,6 +3,12 @@ Changelog
 
 
 
+Version 1.3.7
+=============
+
+    - Fixes:
+        - Model save error when invalid data exists in the evidence column (`bug #623`_)
+
 Version 1.3.6
 =============
 
@@ -102,3 +108,4 @@ Version 1.0.0
 .. _enhancement #564: https://redmine.selventa.com/issues/564
 .. _bug #580: https://redmine.selventa.com/issues/580
 .. _bug #608: https://redmine.selventa.com/issues/608
+.. _bug #623: https://redmine.selventa.com/issues/623
