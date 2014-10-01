@@ -3,6 +3,12 @@ Changelog
 
 
 
+Version 1.3.8
+=============
+
+    - Fixes:
+        - Clear evidence display in Results Panel for unlinked edges (`bug #32`_)
+
 Version 1.3.7
 =============
 
@@ -109,3 +115,4 @@ Version 1.0.0
 .. _bug #580: https://redmine.selventa.com/issues/580
 .. _bug #608: https://redmine.selventa.com/issues/608
 .. _bug #623: https://redmine.selventa.com/issues/623
+.. _bug #32: https://github.com/OpenBEL/kam-nav/issues/32
