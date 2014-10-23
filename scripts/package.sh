@@ -20,6 +20,7 @@ echo "Description: $DIST_DESCRIPTION"
 echo "Version: $DIST_VERSION"
 echo "URL: $DIST_CODEBASE_URL"
 echo "SHA: $CODE_SHA"
+echo "Cytoscape Distribution: $DIST_CY3_DIR"
 
 # build apps and launcher
 echo "...building project"
@@ -36,9 +37,10 @@ echo "...mkdir $DEV_BUILD_DIR/deploy"
 mkdir "$DEV_BUILD_DIR/deploy"
 
 # zip cytoscape distribution
-echo "...packaging cytoscape zip"
-pushd "$DIST_TOOLS_DIR" > /dev/null
-    zip -qr "$DEV_DIR/build/cytoscape.zip" cytoscape
+echo "...packaging cytoscape zip (from $DIST_CY3_DIR)"
+pushd "$DEV_BUILD_DIR" > /dev/null
+    ln -s "$DIST_CY3_DIR" cytoscape
+    zip -qr "$DEV_BUILD_DIR/cytoscape.zip" cytoscape
 popd > /dev/null
 echo "...adding zip to $DEV_BUILD_DIR/libs/sdp-cytoscape3.jar"
 jar -uf "$DEV_BUILD_DIR/libs/sdp-cytoscape3.jar" -C "$DEV_BUILD_DIR" "cytoscape.zip"
