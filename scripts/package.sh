@@ -41,6 +41,7 @@ echo "...packaging cytoscape zip (from $DIST_CY3_DIR)"
 pushd "$DEV_BUILD_DIR" > /dev/null
     ln -s "$DIST_CY3_DIR" cytoscape
     zip -qr "$DEV_BUILD_DIR/cytoscape.zip" cytoscape
+    unlink cytoscape
 popd > /dev/null
 echo "...adding zip to $DEV_BUILD_DIR/libs/sdp-cytoscape3.jar"
 jar -uf "$DEV_BUILD_DIR/libs/sdp-cytoscape3.jar" -C "$DEV_BUILD_DIR" "cytoscape.zip"
