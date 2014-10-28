@@ -2,6 +2,8 @@ package com.selventa.sdp;
 
 import org.apache.log4j.Logger;
 
+import javax.swing.*;
+
 import static com.selventa.sdp.Util.equalMD5;
 import static com.selventa.sdp.Util.extract;
 import static com.selventa.sdp.Util.resource;
@@ -66,6 +68,12 @@ public class Main {
      * {@link Util#windows}.
      */
     private static final String KARAF_SCRIPT;
+
+    private static final String UPDATE_ERROR_TITLE   = "Update Error";
+
+    private static final String UPDATE_ERROR_MESSAGE =
+            "Could not update Cytoscape installation (sdp-cytoscape3/cytoscape). " +
+            "Please close the running Cytoscape and try again. \nException: %s";
 
     /**
      * Compute os-independent values.
@@ -135,10 +143,16 @@ public class Main {
 	    if (replace) {
             log.info(format("Update of zip file required - %s", onDiskZip.getAbsolutePath()));
 	        try (InputStream inJar = resource("/" + CY_ZIP)) {
+                Path cytoscapeDir = new File(cypath, CY_FOLDER).toPath();
+                try {
+                    removeDirectory(cytoscapeDir);
+                } catch (IOException ex) {
+                    log.error(format("Exception removing cytoscape folder - %s", cytoscapeDir), ex);
+                    JOptionPane.showMessageDialog(null, format(UPDATE_ERROR_MESSAGE, ex.getMessage()),
+                            UPDATE_ERROR_TITLE, JOptionPane.ERROR_MESSAGE);
+                }
+
                 Files.copy(inJar, onDiskZip.toPath(), REPLACE_EXISTING);
-
-                removeDirectory(new File(cypath, CY_FOLDER).toPath());
-
                 extract(onDiskZip, cypath);
                 log.info("Successfully updated to latest zip file");
             } catch (IOException e) {
