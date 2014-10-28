@@ -15,3 +15,4 @@ tools/deploy/cytoscape/framework/data/*
 tools/deploy/cytoscape/framework/plugins/*
 tools/deploy/cytoscape/work/*
 tools/distribution/cytoscape/framework/plugins/*
+tools/distribution/cytoscape/framework/instances/*
