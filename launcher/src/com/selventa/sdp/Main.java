@@ -15,7 +15,8 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.nio.file.Files;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -135,6 +136,9 @@ public class Main {
             log.info(format("Update of zip file required - %s", onDiskZip.getAbsolutePath()));
 	        try (InputStream inJar = resource("/" + CY_ZIP)) {
                 Files.copy(inJar, onDiskZip.toPath(), REPLACE_EXISTING);
+
+                removeDirectory(new File(cypath, CY_FOLDER).toPath());
+
                 extract(onDiskZip, cypath);
                 log.info("Successfully updated to latest zip file");
             } catch (IOException e) {
@@ -210,5 +214,23 @@ public class Main {
             log.error(format("File status, exists: %s, readable: %s, writable: %s, hidden: %s",
                       f.exists(), f.canRead(), f.canWrite(), f.isHidden()));
         }
+    }
+
+    private static void removeDirectory(Path p) throws IOException {
+        log.info(format("Removing directory recursively - %s", p.toString()));
+        Files.walkFileTree(p, new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes _) throws IOException {
+                Files.delete(file);
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult postVisitDirectory(Path dir, IOException _) throws IOException {
+                Files.delete(dir);
+                return FileVisitResult.CONTINUE;
+            }
+        });
+        log.info(format("Successfully removed - %s", p.toString()));
     }
 }
