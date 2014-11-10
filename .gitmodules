@@ -14,3 +14,7 @@
 	path = tools/s3cmd
 	url = https://github.com/s3tools/s3cmd.git
     branch = master
+[submodule "tools/getdown"]
+	path = tools/getdown
+	url = https://github.com/abargnesi/getdown.git
+	branch = master
