@@ -24,7 +24,7 @@ echo "Cytoscape Distribution: $DIST_CY3_DIR"
 
 # build apps and launcher
 echo "...building project"
-gradle -q clean build > /dev/null || exit 1
+gradle -q clean compileJava jar compileJarApps > /dev/null || exit 1
 
 # copy apps + dependencies to cytoscape distribution
 echo "...deploying project jars into cytoscape"
