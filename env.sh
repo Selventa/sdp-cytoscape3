@@ -10,6 +10,11 @@ fi
 # environment vars by what they are not how they are used (e.g. tools,
 # scripts, build, deploy).  Beginning to with -- Tools -- section.
 
+# -- Project --
+export DIST_NAME="SDP Cytoscape"
+export DIST_DESCRIPTION="SDP Model building and analysis on Cytoscape."
+export DIST_VERSION="1.4.0"
+
 # -- Development --
 export DEV_DIR="${DEV_DIR:=$DIR}"
 export DEV_BUILD_DIR="${DEV_BUILD_DIR:=$DEV_DIR/build}"
@@ -32,9 +37,6 @@ export DIST_RESOURCES_DIR="${DIST_RESOURCES_DIR:=$DIST_DIR/resources}"
 export DIST_TOOLS_DIR="${DIST_TOOLS_DIR:=$DIST_DIR/tools/distribution}"
 export DIST_CY3_DIR="${DIST_CY3_DIR:=$DIST_TOOLS_DIR/cytoscape}"
 export DIST_CY3_BUNDLE_DIR="${DIST_CY3_BUNDLE_DIR:=$DIST_CY3_DIR/plugins}"
-export DIST_NAME="${DIST_NAME:=SDP Cytoscape}"
-export DIST_DESCRIPTION="${DIST_DESCRIPTION:=SDP Model building an analysis on Cytoscape.}"
-export DIST_VERSION="${DIST_VERSION:=1.0.0}"
 export DIST_CODEBASE_URL="${DIST_CODEBASE_URL:=http://cytoscape.selventa.com/}"
 export DIST_JNLP_FILE="${DIST_JNLP_FILE:=$DIST_RESOURCES_DIR/jnlp/cytoscape3.jnlp}"
 export DIST_GETDOWN_BUILD_JAR="${DIST_GETDOWN_BUILD_JAR:=$DEV_BUILD_DIR/getdown-latest.jar}"
