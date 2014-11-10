@@ -4,7 +4,7 @@
 :: are specified. If so, display help or the current version and exit.
 :: Note: Current version to be implemented after 3.1
 
-set CYTOSCAPE_VERSION=Cytoscape version: 3.1.1
+set CYTOSCAPE_VERSION=Cytoscape version: 3.2.0
 
 set help=false
 IF "%1"=="-h" set help=true
@@ -49,14 +49,14 @@ pushd "%~dp0"
 
 :: Create the Cytoscape.vmoptions file, if it doesn't exist.
 IF EXIST "Cytoscape.vmoptions" GOTO vmoptionsFileExists
-CMD /C gen_vmoptions.bat
+IF EXIST "gen_vmoptions.bat" CMD /C gen_vmoptions.bat
 :vmoptionsFileExists
 
 
 IF EXIST "Cytoscape.vmoptions" GOTO itIsThere
 :: Run with defaults:
 echo "*** Missing Cytoscape.vmoptions, falling back to using defaults!"
-set JAVA_OPTS=-Xmx1250M
+set JAVA_OPTS=-Xms1250M -Xmx1250M
 GOTO setDebugOpts
 
 :: We end up here if we have a Cytoscape.vmoptions file:
@@ -107,6 +107,6 @@ goto :EOF
 framework/bin/karaf %1 %2 %3 %4 %5 %6 %7 %8 >> %USERPROFILE%\sdp-cytoscape3\cytoscape-error.log 2<&1
 
 :: Modified: pop to the original directory
-pushd "%~dp0"
+popd "%~dp0"
 
 :END_BATCH
