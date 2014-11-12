@@ -192,6 +192,8 @@ public class Main {
             } else {
                 bldr.command("cmd.exe", "/c", scriptFile.getAbsolutePath());
             }
+        } else if (macos) {
+            bldr.command("/bin/sh", "-c", ("\"" + scriptFile.getAbsolutePath() + "\""));
         } else {
             bldr.command(scriptFile.getAbsolutePath());
         }
@@ -206,7 +208,7 @@ public class Main {
                 setExecutable(get(JAVA_HOME, "bin", "javaw").toFile());
             }
 
-            Map<String,String> env = bldr.environment();
+            Map<String, String> env = bldr.environment();
             env.put("JAVA_HOME", JAVA_HOME);
             log.info(format("Set JAVA_HOME to local JVM - %s", JAVA_HOME));
         } else {
