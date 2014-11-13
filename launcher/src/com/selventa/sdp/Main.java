@@ -192,24 +192,29 @@ public class Main {
             } else {
                 bldr.command("cmd.exe", "/c", scriptFile.getAbsolutePath());
             }
-        } else if (macos) {
-            bldr.command("/bin/sh", "-c", ("\"" + scriptFile.getAbsolutePath() + "\""));
         } else {
             bldr.command(scriptFile.getAbsolutePath());
         }
         log.info(format("Set process command to - %s", Arrays.toString(bldr.command().toArray())));
 
         if (localJvmPresent(new File(INSTALL_FOLDER))) {
-            String JAVA_HOME = get(INSTALL_FOLDER, "java_vm").toString();
-            log.info(format("Local JVM exists, courtesy of getdown - %s", JAVA_HOME));
 
+            String JAVA_HOME;
             if (macos) {
-                setExecutable(get(JAVA_HOME, "bin", "java").toFile());
-                setExecutable(get(JAVA_HOME, "bin", "javaw").toFile());
+                JAVA_HOME = get(INSTALL_FOLDER, "java_vm", "Contents", "Home").toString();
+
+                // MacOSX: Responsible for forking processes with Runtime.exec or ProcessBuilder.start
+                setExecutable(get(JAVA_HOME, "lib", "jspawnhelper").toFile());
+            } else {
+                JAVA_HOME = get(INSTALL_FOLDER, "java_vm").toString();
             }
 
-            Map<String, String> env = bldr.environment();
-            env.put("JAVA_HOME", JAVA_HOME);
+            // Make sure java binary is executable since we unpack from a JAR.
+            setExecutable(get(JAVA_HOME, "bin", "java").toFile());
+
+            // Set JAVA_HOME in sub-process's environment. This will be picked up by cytoscape launch scripts.
+            bldr.environment().put("JAVA_HOME", JAVA_HOME);
+
             log.info(format("Set JAVA_HOME to local JVM - %s", JAVA_HOME));
         } else {
             log.info("System JVM meets requirements; no local JVM");
