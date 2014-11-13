@@ -20,7 +20,6 @@ import java.net.UnknownHostException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
-import java.util.Map;
 
 /**
  * Launches cytoscape with SDP / OpenBEL plugins.
@@ -145,7 +144,7 @@ public class Main {
 	        try (InputStream inJar = resource("/" + CY_ZIP)) {
                 Path cytoscapeDir = new File(cypath, CY_FOLDER).toPath();
                 try {
-                    removeDirectory(cytoscapeDir);
+                    safelyRemoveDirectory(cytoscapeDir);
                 } catch (IOException ex) {
                     log.error(format("Exception removing cytoscape folder - %s", cytoscapeDir), ex);
                     JOptionPane.showMessageDialog(null, format(UPDATE_ERROR_MESSAGE, ex.getMessage()),
@@ -233,7 +232,11 @@ public class Main {
         }
     }
 
-    private static void removeDirectory(Path p) throws IOException {
+    private static void safelyRemoveDirectory(Path p) throws IOException {
+        // guards
+        if (p == null) return;
+        if (!p.toFile().exists()) return;
+
         log.info(format("Removing directory recursively - %s", p.toString()));
         Files.walkFileTree(p, new SimpleFileVisitor<Path>() {
             @Override
