@@ -199,14 +199,10 @@ public class Main {
 
         if (localJvmPresent(new File(INSTALL_FOLDER))) {
 
-            String JAVA_HOME;
+            String JAVA_HOME = get(INSTALL_FOLDER, "java_vm").toString();
             if (macos) {
-                JAVA_HOME = get(INSTALL_FOLDER, "java_vm", "Contents", "Home").toString();
-
                 // MacOSX: Responsible for forking processes with Runtime.exec or ProcessBuilder.start
                 setExecutable(get(JAVA_HOME, "lib", "jspawnhelper").toFile());
-            } else {
-                JAVA_HOME = get(INSTALL_FOLDER, "java_vm").toString();
             }
 
             // Make sure java binary is executable since we unpack from a JAR.
