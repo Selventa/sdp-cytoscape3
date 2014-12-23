@@ -3,6 +3,12 @@ Changelog
 
 
 
+Version 1.3.9
+=============
+
+    - Enhancement:
+        - Updated certificates to SDP.
+
 Version 1.3.8
 =============
 
