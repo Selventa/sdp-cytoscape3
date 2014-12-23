@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+Version 1.3.10
+==============
+
+    - Fixes:
+        - Evidence citation does not handle invalid references or URLs (`bug #33`_)
 
 Version 1.3.9
 =============
@@ -122,3 +127,4 @@ Version 1.0.0
 .. _bug #608: https://redmine.selventa.com/issues/608
 .. _bug #623: https://redmine.selventa.com/issues/623
 .. _bug #32: https://github.com/OpenBEL/kam-nav/issues/32
+.. _bug #33: https://github.com/OpenBEL/kam-nav/issues/33
