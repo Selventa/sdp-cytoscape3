@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+Version 1.3.11
+==============
+
+    - Fixes:
+        - Report and log OpenBEL Web API errors experienced with KamNav functionality.
+
 Version 1.3.10
 ==============
 
