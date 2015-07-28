@@ -64,6 +64,11 @@ goto :EOF
 
 :: This is probably wrong.  We don't really want the user to be in this directory, do we?
 cd framework
+
+:: Work around java.lang.NoClassDefFoundError: sun/reflect/ConstructorAccessorImpl
+:: http://bugs.java.com/view_bug.do?bug_id=6265952
+set JAVA_OPTS=%JAVA_OPTS% -Dsun.reflect.noInflation=true
+
 bin/karaf %1 %2 %3 %4 %5 %6 %7 %8 >> %USERPROFILE%\sdp-cytoscape3\cytoscape-error.log 2<&1
 
 :: Modified: pop to the original directory

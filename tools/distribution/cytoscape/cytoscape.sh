@@ -26,6 +26,11 @@ if [ ! -e "$vm_options_path/Cytoscape.vmoptions"  -a  -x "$script_path/gen_vmopt
 fi
 
 export JAVA_OPTS=-Xmx1550M
+
+# Work around java.lang.NoClassDefFoundError: sun/reflect/ConstructorAccessorImpl
+# http://bugs.java.com/view_bug.do?bug_id=6265952
+export JAVA_OPTS="$JAVA_OPTS -Dsun.reflect.noInflation=true"
+
 if [ -r $vm_options_path/Cytoscape.vmoptions ]; then
 		JAVA_OPTS=`cat $vm_options_path/Cytoscape.vmoptions`
 else # Just use sensible defaults.
