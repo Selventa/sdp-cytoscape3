@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+Version 1.4.0
+=============
+
+    - Enhancements:
+        - Includes a single OSGi bundle JAR for the BEL Navigator app.
+    - Fixes:
+        - Fixed error with linking knowledge networks (introduced in 1.3.11).
+
 Version 1.3.11
 ==============
 
