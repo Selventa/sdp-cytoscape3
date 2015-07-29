@@ -25,6 +25,10 @@ echo "SHA: $CODE_SHA"
 echo "...building project"
 gradle -q clean build > /dev/null || exit 1
 
+cd apps/bel-nav
+mvn -q clean package || exit 1
+cd "${DIR}"
+
 # copy apps + dependencies to cytoscape distribution
 echo "...deploying project jars into cytoscape"
 for app in `find "$DEV_APPS_DIR" -mindepth 1 -maxdepth 1 -type d`; do

@@ -14,3 +14,6 @@
 	path = tools/s3cmd
 	url = https://github.com/s3tools/s3cmd.git
     branch = master
+[submodule "apps/bel-nav"]
+	path = apps/bel-nav
+	url = git@github.com:OpenBEL/bel-nav.git

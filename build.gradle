@@ -27,26 +27,28 @@ configurations {
 }
 
 new File("$System.env.DEV_APPS_DIR").eachDir { appDir ->
-    task "clean-${appDir.name}" (type: GradleBuild) {
-      buildFile = "${appDir}/build.gradle"
-      tasks = ['clean']
-    }
-    project.ext.cleanApps << "clean-${appDir.name}"
-    task "compileJar-${appDir.name}" (type: GradleBuild) {
-      buildFile = "${appDir}/build.gradle"
-      tasks = ['compileGroovy', 'jar']
-    }
-    project.ext.compileJarApps << "compileJar-${appDir.name}"
-    task "build-${appDir.name}" (type: GradleBuild) {
-      buildFile = "${appDir}/build.gradle"
-      tasks = ['build']
-    }
-    project.ext.buildApps << "build-${appDir.name}"
-    task "test-${appDir.name}" (type: GradleBuild) {
-      buildFile = "${appDir}/build.gradle"
-      tasks = ['test']
-    }
-    project.ext.testApps << "test-${appDir.name}"
+    if (appDir.name == "model-builder") {
+				task "clean-${appDir.name}" (type: GradleBuild) {
+					buildFile = "${appDir}/build.gradle"
+					tasks = ['clean']
+				}
+				project.ext.cleanApps << "clean-${appDir.name}"
+				task "compileJar-${appDir.name}" (type: GradleBuild) {
+					buildFile = "${appDir}/build.gradle"
+					tasks = ['compileGroovy', 'jar']
+				}
+				project.ext.compileJarApps << "compileJar-${appDir.name}"
+				task "build-${appDir.name}" (type: GradleBuild) {
+					buildFile = "${appDir}/build.gradle"
+					tasks = ['build']
+				}
+				project.ext.buildApps << "build-${appDir.name}"
+				task "test-${appDir.name}" (type: GradleBuild) {
+					buildFile = "${appDir}/build.gradle"
+					tasks = ['test']
+				}
+				project.ext.testApps << "test-${appDir.name}"
+		}
 }
 
 clean.dependsOn project.ext.cleanApps
