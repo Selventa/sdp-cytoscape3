@@ -32,11 +32,6 @@ export JAVA_OPTS="-Xmx1550M -XX:MaxPermSize=512M"
 export JAVA_OPTS="$JAVA_OPTS -Dplugin.cy3.work.dir=$DEV_CY3_WORK_DIR"
 export JAVA_OPTS="$JAVA_OPTS -Dplugin.cy3.bundle.dir=$DEV_CY3_BUNDLE_DIR"
 export JAVA_OPTS="$JAVA_OPTS -Dplugin.cy3.log.file=$DEV_CY3_LOG_FILE"
-
-# Work around java.lang.NoClassDefFoundError: sun/reflect/ConstructorAccessorImpl
-# http://bugs.java.com/view_bug.do?bug_id=6265952
-export JAVA_OPTS="$JAVA_OPTS -Dsun.reflect.noInflation=true"
-
 if [ -r $vm_options_path/Cytoscape.vmoptions ]; then
     JAVA_OPTS="$JAVA_OPTS `cat $vm_options_path/Cytoscape.vmoptions`"
 fi
@@ -55,5 +50,9 @@ export KARAF_OPTS=-Xms128M\ -Dcom.sun.management.jmxremote\ -Duser.dir="$PWD"\ -
 
 export KARAF_DATA="${PLUGIN_CY3_DATA_DIR}"
 mkdir -p "${KARAF_DATA}/tmp"
+
+# Work around java.lang.NoClassDefFoundError: sun/reflect/ConstructorAccessorImpl
+# http://bugs.java.com/view_bug.do?bug_id=6265952
+export JAVA_OPTS="$JAVA_OPTS -Dsun.reflect.noInflation=true"
 
 $script_path/framework/bin/karaf "$@"

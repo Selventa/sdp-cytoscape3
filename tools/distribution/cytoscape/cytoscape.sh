@@ -26,11 +26,6 @@ if [ ! -e "$vm_options_path/Cytoscape.vmoptions"  -a  -x "$script_path/gen_vmopt
 fi
 
 export JAVA_OPTS=-Xmx1550M
-
-# Work around java.lang.NoClassDefFoundError: sun/reflect/ConstructorAccessorImpl
-# http://bugs.java.com/view_bug.do?bug_id=6265952
-export JAVA_OPTS="$JAVA_OPTS -Dsun.reflect.noInflation=true"
-
 if [ -r $vm_options_path/Cytoscape.vmoptions ]; then
 		JAVA_OPTS=`cat $vm_options_path/Cytoscape.vmoptions`
 else # Just use sensible defaults.
@@ -53,5 +48,9 @@ export KARAF_OPTS=-Xms128M\ -Dcom.sun.management.jmxremote\ -Dcytoscape.home="$C
 
 export KARAF_DATA="${HOME}/CytoscapeConfiguration/3/karaf_data"
 mkdir -p "${KARAF_DATA}/tmp"
+
+# Work around java.lang.NoClassDefFoundError: sun/reflect/ConstructorAccessorImpl
+# http://bugs.java.com/view_bug.do?bug_id=6265952
+export JAVA_OPTS="$JAVA_OPTS -Dsun.reflect.noInflation=true"
 
 $script_path/framework/bin/karaf "$@" >> "$HOME/sdp-cytoscape3/cytoscape-error.log" 2>&1
